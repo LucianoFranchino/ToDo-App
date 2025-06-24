@@ -1,3 +1,14 @@
 <p>Agregar Tarea</p>
 <input type="text" [(ngModel)]="newTask" placeholder="Escribi una Tarea">
+<input type="text" placeholder="Description" [(ngModel)]="taskDescription">
+<label> Fecha
+    <input type="date" [(ngModel)]="taskDate">
+</label>
+<label> Seleccionar Importancia
+    <select name="Importancia" id="select-importancia" [(ngModel)]="taskImportance">
+        <option value="Urgente" style="color: red;">Urgente</option>
+        <option value="Importante" style="color: orange">Importante</option>
+        <option value="Menos Importante" style="color: green">Menos Importante</option>
+    </select>
+</label>
 <button (click)="addTask()">Agregar</button>
