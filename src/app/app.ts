@@ -23,4 +23,33 @@ export class App {
   removeTask(index: number) {
     this.tasks.splice(index, 1);
   }
+
+  checkTaskComplete(task: TaskDescription){
+    const index = this.tasks.indexOf(task);
+    if(index > -1){
+      this.tasks[index].completed = !this.tasks[index].completed;
+    }
+  }
+
+  filterTasks(completed: boolean): TaskDescription[] {
+    return this.tasks.filter(t => t.completed === completed);
+  }
+
+  sortCompleteTask: string = 'nombre';
+  sortPendingTask: string = 'nombre';
+
+  getSortedTask(completed:boolean, sortOption: string): TaskDescription[]{
+    const filtered = this.tasks.filter( t => t.completed === completed);
+    switch(sortOption){
+      case 'nombre':
+        return filtered.sort((a, b) => a.description.localeCompare(b.description));
+      case 'fecha':
+        return filtered.sort((a, b) => a.date.localeCompare(b.date));
+      case 'prioridad':
+        const orden = { alta: 1, media: 2, baja: 3 };
+        return filtered.sort((a, b) => orden[a.importance as 'alta' | 'media' | 'baja'] - orden[b.importance as 'alta' | 'media' | 'baja']);
+      default:
+        return filtered;
+    }
+  }
 }

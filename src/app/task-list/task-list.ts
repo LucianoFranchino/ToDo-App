@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskDescription } from '../task-description';
 
@@ -13,9 +13,15 @@ import { TaskDescription } from '../task-description';
 export class TaskList {
   @Input() tasks: TaskDescription[] = [];
   @Output() taskRemoved = new EventEmitter<number>();
+  @Output() taskComplete =new EventEmitter<TaskDescription>();
+
 
   removeTask(index: number) {
     this.taskRemoved.emit(index);
+  }
+
+  checkComplete(task: TaskDescription){
+    this.taskComplete.emit(task);
   }
 }
 
